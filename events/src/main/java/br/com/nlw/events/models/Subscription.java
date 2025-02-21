@@ -8,9 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "tbl_subscription")
+@Data
 public class Subscription {
 
   @Id
@@ -24,7 +26,7 @@ public class Subscription {
 
   @ManyToOne
   @JoinColumn(name = "subscribed_user_id")
-  private User user;
+  private User subscriber;
 
   @ManyToOne
   @JoinColumn(name = "indication_user_id", nullable = true)
