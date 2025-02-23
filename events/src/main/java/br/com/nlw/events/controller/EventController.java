@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.nlw.events.models.Event;
 import br.com.nlw.events.services.EventService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 public class EventController {
@@ -26,18 +27,21 @@ public class EventController {
   }
 
   @PostMapping("/events")
+  @Operation(summary = "Create a new event")
   public Event addNewEvent(@RequestBody Event newEvent) {
     logger.info("Creating new event: {}", newEvent.getPrettyName());
     return eventService.addNewEvent(newEvent);
   }
 
   @GetMapping("/events")
+  @Operation(summary = "Get all events")
   public List<Event> getAllEvents() {
     logger.info("Getting all events");
     return eventService.getAllEvents();
   }
 
   @GetMapping("/events/{prettyName}")
+  @Operation(summary = "Get event by pretty name")
   public ResponseEntity<Event> getByPrettyName(@PathVariable String prettyName) {
     Event evt = eventService.getByPrettyName(prettyName);
     if (evt != null) {

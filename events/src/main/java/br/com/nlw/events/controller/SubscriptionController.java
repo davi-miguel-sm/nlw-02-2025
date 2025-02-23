@@ -21,6 +21,7 @@ import br.com.nlw.events.exceptions.SubscriptionConflictException;
 import br.com.nlw.events.exceptions.UserIndicatorNotFoundException;
 import br.com.nlw.events.models.User;
 import br.com.nlw.events.services.SubscriptionService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 public class SubscriptionController {
@@ -35,6 +36,7 @@ public class SubscriptionController {
   }
 
   @PostMapping({ "/subscription/{prettyname}", "/subscription/{prettyname}/{userId}" })
+  @Operation(summary = "Create a new subscription in an event")
   public ResponseEntity<?> createSubscription(
       @PathVariable String prettyname,
       @PathVariable(required = false) Integer userId,
@@ -62,6 +64,7 @@ public class SubscriptionController {
   }
 
   @GetMapping("/subscription/{prettyname}/ranking")
+  @Operation(summary = "Get top 3 affiliates")
   public ResponseEntity<?> getSubscriptionRanking(@PathVariable String prettyname) {
     logger.info("Getting subscription ranking for event: {}", prettyname);
     try {
@@ -82,6 +85,7 @@ public class SubscriptionController {
   }
 
   @GetMapping("/subscription/{prettyname}/ranking/{userId}")
+  @Operation(summary = "Get ranking of a specific affiliate")
   public ResponseEntity<?> getSubscriptionRankingByUser(@PathVariable String prettyname, @PathVariable Integer userId) {
     logger.info("Getting subscription ranking for event: {} by user: {}", prettyname, userId);
     try {
